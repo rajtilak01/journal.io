@@ -29,7 +29,7 @@ export default function AuthForm({type}: {type: 'signin' | 'signup'}) {
   const handleGoogleLogin = async () => {
     try {
       await signInWithGoogle();
-      router.push('/'); // Redirect to home page after successful login
+      router.push('/canvas'); // Redirect to home page after successful login
     } catch (error: any) {
       setError(error.message);
     }
@@ -99,13 +99,13 @@ export default function AuthForm({type}: {type: 'signin' | 'signup'}) {
             onClick={handleGoogleLogin}
             className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
           >
-            {type === 'signin' ? 'Sign up' : 'Sign in'} with Google
+            {type === 'signin' ? 'Sign in' : 'Sign up'} with Google
           </button>
         </div>
 
         <div className="text-center mt-4">
           <Link
-            href={type === 'signin' ? '/auth/signup' : '/auth/login'}
+            href={type === 'signin' ? '/signup' : '/login'}
             className="text-indigo-600 hover:text-indigo-500"
           >
             {type === 'signin' ? "Don't have an account? Sign up" : 'Already have an account? Sign in'}

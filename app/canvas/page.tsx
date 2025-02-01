@@ -1,0 +1,18 @@
+import { Textarea } from "@/components/ui/textarea"; // Import Textarea if using ShadCN
+
+export default function Canvas() {
+  return (
+    <div className="min-h-screen bg-gray-800 text-white p-6">
+      <h1 className="text-2xl font-bold mb-4">Canvas Page</h1>
+      
+      <div className="flex flex-col md:flex-row gap-4">
+        <div className="w-full md:w-2/3 bg-gray-900 rounded-lg shadow-lg p-4">
+          <Textarea
+            className="w-full h-96 md:h-screen p-4 bg-gray-800 text-white rounded-lg border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Start writing here..."
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
