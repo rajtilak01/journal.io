@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 
 export default function Home() {
   const router = useRouter();
-
   
   return (
     <div className="flex justify-center items-center text-center h-screen">
