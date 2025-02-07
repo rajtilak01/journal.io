@@ -4,17 +4,30 @@ import { useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import { RichTextEditor } from '@mantine/tiptap';
 
-const content = '<p>Subtle rich text editor variant</p>';
+const content = '<p>How was your day?</p>';
 
-export default function Demo() {
+export default function TipTap() {
   const editor = useEditor({
     extensions: [StarterKit, Underline, Highlight],
     content,
   });
 
   return (
-    <RichTextEditor editor={editor} variant="subtle">
-      <RichTextEditor.Toolbar sticky stickyOffset={60}>
+    <RichTextEditor
+      editor={editor}
+      variant="subtle"
+      styles={{
+        root: {
+          backgroundColor: 'gray',
+          height: '100%',
+        },
+        content: {
+          color: 'white',
+          height: '100%',
+        },
+      }}
+    >
+      <RichTextEditor.Toolbar>
         <RichTextEditor.ControlsGroup>
           <RichTextEditor.Bold />
           <RichTextEditor.Italic />
@@ -26,7 +39,7 @@ export default function Demo() {
         </RichTextEditor.ControlsGroup>
       </RichTextEditor.Toolbar>
 
-      <RichTextEditor.Content />
+      <RichTextEditor.Content style={{ height: '100%' }} />
     </RichTextEditor>
   );
 }
