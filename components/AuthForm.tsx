@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/app/context/AuthContext';
 import Link from 'next/link';
+import {createUser} from '@/server/users.actions';
+
 
 export default function AuthForm({type}: {type: 'signin' | 'signup'}) {
   const [email, setEmail] = useState('');
@@ -15,12 +17,18 @@ export default function AuthForm({type}: {type: 'signin' | 'signup'}) {
   const handleEmailLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
+      let user = null;
       if (type === 'signin') {
-        await loginWithEmailAndPassword(email, password);
+        user = await loginWithEmailAndPassword(email, password);
+        // console.log("result after login", result);
       } else if (type === 'signup') {
-        await signUpWithEmailAndPassword(email, password);
+        user = await signUpWithEmailAndPassword(email, password);
+        if(!user) return;
+        const userDB = await createUser(email, {uid: user.uid});
+        // console.log("result after signup", result);
       }
-      router.push('/'); // Redirect to home page after successful login
+
+      router.push('/canvas'); // Redirect to home page after successful login
     } catch (error: any) {
       setError(error.message);
     }
@@ -28,7 +36,8 @@ export default function AuthForm({type}: {type: 'signin' | 'signup'}) {
 
   const handleGoogleLogin = async () => {
     try {
-      await signInWithGoogle();
+      const result = await signInWithGoogle();
+      // console.log("result after google login", result);
       router.push('/canvas'); // Redirect to home page after successful login
     } catch (error: any) {
       setError(error.message);

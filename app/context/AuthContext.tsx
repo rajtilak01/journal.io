@@ -15,9 +15,9 @@ import { auth } from '@/lib/firebase';
 interface AuthContextType {
   user: User | null;
   loading: boolean;
-  signInWithGoogle: () => Promise<void>;
-  loginWithEmailAndPassword: (email: string, password: string) => Promise<void>;
-  signUpWithEmailAndPassword: (email: string, password: string) => Promise<void>;
+  signInWithGoogle: () => Promise<User | void>;
+  loginWithEmailAndPassword: (email: string, password: string) => Promise<User | void>;
+  signUpWithEmailAndPassword: (email: string, password: string) => Promise<User |void>;
   logout: () => Promise<void>;
 }
 
@@ -39,7 +39,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const signInWithGoogle = async () => {
     try {
       const provider = new GoogleAuthProvider();
-      await signInWithPopup(auth, provider);
+      const result = await signInWithPopup(auth, provider);
+      return result.user;
     } catch (error) {
       console.error('Error signing in with Google:', error);
       throw error;
@@ -48,7 +49,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const loginWithEmailAndPassword = async (email: string, password: string) => {
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      const result = await signInWithEmailAndPassword(auth, email, password);
+      return result.user;
     } catch (error) {
       console.error('Error logging in with email/password:', error);
       throw error;
@@ -57,7 +59,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const signUpWithEmailAndPassword = async (email: string, password: string) => {
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
+      const result = await createUserWithEmailAndPassword(auth, email, password);
+      return result.user;
     } catch (error) {
       console.error('Error signing up with email/password:', error);
       throw error;
