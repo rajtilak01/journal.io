@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useAuth } from '@/app/context/AuthContext';
 import Link from 'next/link';
 import {createUser} from '@/server/users.actions';
+import { setCookie } from '@/server/auth.actions';
 
 
 export default function AuthForm({type}: {type: 'signin' | 'signup'}) {
@@ -28,6 +29,10 @@ export default function AuthForm({type}: {type: 'signin' | 'signup'}) {
         // console.log("result after signup", result);
       }
 
+      const token = await user?.getIdToken();
+      // console.log("token", token);
+      if(!token) return;
+      setCookie(token);
       router.push('/canvas'); // Redirect to home page after successful login
     } catch (error: any) {
       setError(error.message);
