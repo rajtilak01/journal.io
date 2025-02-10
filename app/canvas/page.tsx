@@ -1,5 +1,4 @@
 'use client';
-import { Textarea } from "@/components/ui/textarea"; // Import Textarea if using ShadCN
 import Navbar from "@/components/Navbar";
 import TipTap from "@/components/TipTap";
 

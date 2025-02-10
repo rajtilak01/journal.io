@@ -5,6 +5,7 @@ import StarterKit from '@tiptap/starter-kit';
 import { RichTextEditor } from '@mantine/tiptap';
 import { useState } from 'react';
 import { Button } from './ui/button';
+import axios from 'axios';
 
 const content = '<p>How was your day?</p>';
 
@@ -21,17 +22,14 @@ export default function TipTap() {
 
   const handleSubmit = async () => {
     console.log("Sending data:", editorContent);
-
-    // Send data to backend
-    // await fetch('/api/save-journal', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify({ content: editorContent }),
-    // });
-
-    alert("Journal saved!");
+    try {
+      const result = await axios.post('/api/createJournal', { title: "hey there", content: editorContent });
+      console.log("Result after sending data:", result);
+      alert("Journal saved!");
+    } catch (error) {
+      console.log("error occurred during api call", error);
+      alert("Error occurred while saving journal!");
+    }
   };
   
   return (
