@@ -14,7 +14,7 @@ datasource db {
 }
 
 model User {
-  id        String  @id @default(uuid())  // Unique user ID in PostgreSQL
+  id        String  @id @default(uuid())  
   firebaseId String @unique              // Firebase UID
   email     String  @unique
   name      String?
