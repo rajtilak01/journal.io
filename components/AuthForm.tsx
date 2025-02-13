@@ -50,10 +50,10 @@ export default function AuthForm({type}: {type: 'signin' | 'signup'}) {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
         <div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+          <h2 className="mt-6 text-center text-3xl font-extrabold text-white-900">
             {type === 'signin' ? 'Sign in' : 'Sign up'} to your account
           </h2>
         </div>
@@ -63,10 +63,10 @@ export default function AuthForm({type}: {type: 'signin' | 'signup'}) {
           </div>
         )}
         <form className="mt-8 space-y-6" onSubmit={handleEmailLogin}>
-          <div className="rounded-md shadow-sm -space-y-px">
-            <div>
-              <label htmlFor="email-address" className="sr-only">
-                Email address
+          <div className="space-y-4">
+            <div className="flex flex-col">
+              <label htmlFor="email-address" className="text-sm font-medium text-gray-300 mb-1">
+                Email Address
               </label>
               <input
                 id="email-address"
@@ -74,14 +74,15 @@ export default function AuthForm({type}: {type: 'signin' | 'signup'}) {
                 type="email"
                 autoComplete="email"
                 required
-                className="dark:text-white appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                placeholder="Email address"
+                className="w-full px-4 py-2 rounded-lg bg-gray-800 text-white placeholder-gray-400 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                placeholder="Enter your email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
-            <div>
-              <label htmlFor="password" className="sr-only">
+
+            <div className="flex flex-col">
+              <label htmlFor="password" className="text-sm font-medium text-gray-300 mb-1">
                 Password
               </label>
               <input
@@ -90,13 +91,14 @@ export default function AuthForm({type}: {type: 'signin' | 'signup'}) {
                 type="password"
                 autoComplete="current-password"
                 required
-                className="dark:text-white appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                placeholder="Password"
+                className="w-full px-4 py-2 rounded-lg bg-gray-800 text-white placeholder-gray-400 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                placeholder="Enter your password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-          </div>
+        </div>
+
 
           <div>
             <button
