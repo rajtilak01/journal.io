@@ -13,7 +13,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         transition={{ duration: 0.8, ease: "easeOut" }}
         className="hidden w-1/2 items-center justify-center p-10 lg:flex xl:w-1/2  relative overflow-hidden "
       >
-        {/* Floating Circles Animation - Fixed */}
         <motion.div
           className="absolute inset-0 flex items-center justify-center -z-10"
           initial={{ opacity: 0 }}

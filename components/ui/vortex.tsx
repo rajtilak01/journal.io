@@ -253,4 +253,4 @@ export function Vortex (props: VortexProps) {
       </div>
     </div>
   );
-};
+}
