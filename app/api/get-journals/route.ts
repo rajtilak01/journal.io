@@ -5,15 +5,16 @@ import { prisma } from '@/lib/db';
 export async function POST(req: NextRequest) {
   try {
     // Get token from cookies
-    const token = req.cookies.get('token')?.value;
-    if (!token) return NextResponse.json({ error: 'Not authenticated' }, { status: 401 });
+    const authHeader = req.headers.get('Authorization');
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+      return NextResponse.json({ error: 'Not authenticated' }, { status: 401 });
+    }
 
-    // console.log("Token:", token);
- 
+    const token = authHeader.split(' ')[1];
+
     // Verify token
     const decoded = await adminAuth.verifyIdToken(token);
     const uid = decoded.uid;
-    // console.log("UID:", uid);
 
     // Check if user exists
     const journals = await prisma.journal.findMany({ where: { userId: uid } });

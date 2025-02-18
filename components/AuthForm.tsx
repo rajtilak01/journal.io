@@ -21,23 +21,23 @@ export default function AuthForm({type}: {type: 'signin' | 'signup'}) {
       let user = null;
       if (type === 'signin') {
         user = await loginWithEmailAndPassword(email, password);
-        // console.log("result after login", result);
       } else if (type === 'signup') {
         user = await signUpWithEmailAndPassword(email, password);
-        if(!user) return;
-        const userDB = await createUser(email, {uid: user.uid});
-        // console.log("result after signup", result);
+        if (!user) return;
+        await createUser(email, { uid: user.uid });
       }
-
+  
       const token = await user?.getIdToken();
-      // console.log("token", token);
-      if(!token) return;
-      setCookie(token);
-      router.push('/canvas'); // Redirect to home page after successful login
+      if (!token) return;
+  
+      localStorage.setItem('token', token);  
+  
+      router.push('/canvas'); // Redirect after login
     } catch (error: any) {
       setError(error.message);
     }
   };
+  
 
   const handleGoogleLogin = async () => {
     try {
