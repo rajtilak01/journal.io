@@ -12,8 +12,6 @@ export async function POST(req: NextRequest) {
 
     const token = authHeader.split(' ')[1];
 
-    // console.log("Token:", token);
-
     // Verify token
     const decoded = await adminAuth.verifyIdToken(token);
     const uid = decoded.uid;
