@@ -8,12 +8,12 @@ export async function POST(req: NextRequest) {
     const token = req.cookies.get('token')?.value;
     if (!token) return NextResponse.json({ error: 'Not authenticated' }, { status: 401 });
 
-    console.log("Token:", token);
+    // console.log("Token:", token);
 
     // Verify token
     const decoded = await adminAuth.verifyIdToken(token);
     const uid = decoded.uid;
-    console.log("UID:", uid);
+    // console.log("UID:", uid);
 
     const { title, content } = await req.json();
 
