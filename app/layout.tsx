@@ -3,10 +3,14 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { Providers } from "./providers";
 import { ThemeProvider } from "@/components/theme-provider";
-import '@mantine/core/styles.css';
-import '@mantine/tiptap/styles.css';
-import { ColorSchemeScript, MantineProvider, mantineHtmlProps } from '@mantine/core';
-
+import "@mantine/core/styles.css";
+import "@mantine/tiptap/styles.css";
+import {
+  ColorSchemeScript,
+  MantineProvider,
+  mantineHtmlProps,
+} from "@mantine/core";
+import { Toaster } from "react-hot-toast";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -36,14 +40,29 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
           <ColorSchemeScript />
           <Providers>
             <MantineProvider defaultColorScheme="dark">
+              <Toaster
+                position="top-center"
+                toastOptions={{
+                  success: {
+                    style: {
+                      background: "green",
+                    },
+                  },
+                  error: {
+                    style: {
+                      background: "red",
+                    },
+                  },
+                }}
+              />
               {children}
             </MantineProvider>
           </Providers>

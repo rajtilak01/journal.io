@@ -5,8 +5,6 @@ import { useRouter } from 'next/navigation';
 import { useAuth } from '@/app/context/AuthContext';
 import Link from 'next/link';
 import {createUser} from '@/server/users.actions';
-import { setCookie } from '@/server/auth.actions';
-import axios from 'axios';
 import Cookies from 'js-cookie';
 
 
@@ -36,7 +34,7 @@ export default function AuthForm({type}: {type: 'signin' | 'signup'}) {
   
       Cookies.set('token', token, { secure: true, sameSite: 'Strict' }); 
 
-      router.push('/canvas'); // Redirect after login
+      router.push('/dashboard'); 
     } catch (error: any) {
       setError(error.message);
     }
@@ -52,7 +50,7 @@ export default function AuthForm({type}: {type: 'signin' | 'signup'}) {
       localStorage.setItem('token', token);  
       Cookies.set('token', token, { secure: true, sameSite: 'Strict' });
       // console.log("result after google login", result);
-      router.push('/canvas'); // Redirect to home page after successful login
+      router.push('/dashboard'); 
     } catch (error: any) {
       setError(error.message);
     }
