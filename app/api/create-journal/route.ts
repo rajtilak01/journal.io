@@ -17,7 +17,7 @@ export async function POST(req: NextRequest) {
     const uid = decoded.uid;
     // console.log("UID:", uid);
 
-    const { title, content } = await req.json();
+    const { content } = await req.json();
 
     // Check if user exists
     const user = await prisma.user.findUnique({ where: { firebaseId: uid } });
@@ -26,7 +26,6 @@ export async function POST(req: NextRequest) {
     // Create journal entry
     const journal = await prisma.journal.create({
       data: {
-        title,
         content,
         user: { connect: { id: user.id } },
       },

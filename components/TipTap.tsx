@@ -23,7 +23,7 @@ export default function TipTap() {
   const handleSubmit = async () => {
     console.log("Sending data:", editorContent);
     try {
-      const result = await apiClient.post('/create-journal', { title: "hey there", content: editorContent });
+      const result = await apiClient.post('/create-journal', { content: editorContent });
       console.log("Result after sending data:", result);
       alert("Journal saved!");
     } catch (error) {
