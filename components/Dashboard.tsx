@@ -1,4 +1,4 @@
-import  { apiFetch } from "@/lib/apiClient";
+import  { apiFetch } from "@/lib/apiFetch"
 import Navbar from "./Navbar";
 import { cookies } from "next/headers";
 

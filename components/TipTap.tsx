@@ -5,9 +5,8 @@ import StarterKit from "@tiptap/starter-kit";
 import { RichTextEditor } from "@mantine/tiptap";
 import { useState } from "react";
 import { Button } from "./ui/button";
-import apiClient from "@/lib/apiClient";
+import {apiFetch} from "@/lib/apiFetch";
 import { useRouter } from "next/navigation";
-import toast from "react-hot-toast";
 import { dismissToast, showLoadingToast, showSuccessToast } from "@/lib/toast";
 
 const content = "<p>How was your day?</p>";
@@ -28,8 +27,11 @@ export default function TipTap() {
     // console.log("Sending data:", editorContent);
     try {
       const loadingToast = showLoadingToast("Saving journal...");
-      const result = await apiClient.post("/create-journal", {
-        content: editorContent,
+      const result = await apiFetch("http://localhost:3000/api/create-journal", {
+        method: "POST",
+        credentials: "include",
+        body: JSON.stringify({
+        content: editorContent,})
       });
       // console.log("Result after sending data:", result);
       dismissToast(loadingToast);
