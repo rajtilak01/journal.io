@@ -1,17 +1,21 @@
-import { NextResponse } from 'next/server';
-import { cookies } from 'next/headers'; // Import cookies helper
+import { NextResponse } from "next/server";
+import type { NextRequest } from 'next/server';
 
-export async function middleware(req: Request) {
-  const cookieStore = await cookies(); 
-  const token = cookieStore.get('token')?.value; 
+export async function middleware(req: NextRequest) {
+  const token = req.cookies.get('token')?.value;
+  const requestHeaders = new Headers(req.headers);
 
   if (!token) {
-    return NextResponse.redirect(new URL('/login', req.url));
+    return NextResponse.redirect(new URL("/login", req.url));
   }
 
-  return NextResponse.next();
+  requestHeaders.set('Authorization', `Bearer ${token}`);
+
+  return NextResponse.next({
+    headers: requestHeaders,
+  });
 }
 
 export const config = {
-  matcher: ['/dashboard', '/canvas',],
+  matcher: ["/dashboard", "/canvas"],
 };

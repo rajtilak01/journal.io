@@ -1,28 +1,26 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { auth as adminAuth } from '@/lib/firebaseAdmin';
 import { prisma } from '@/lib/db';
-
+import { cookies } from "next/headers";
 export async function GET(req: NextRequest) {
   try {
-    // Get token from cookies
     const authHeader = req.headers.get('Authorization');
+    // console.log("auth header", authHeader);
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
       return NextResponse.json({ error: 'Not authenticated' }, { status: 401 });
     }
-
     const token = authHeader.split(' ')[1];
-
-    // Verify token
-    const decoded = await adminAuth.verifyIdToken(token);
+    
+    console.log("token coming from frontend", token);
+    const decoded = await adminAuth.verifyIdToken(token.toString());
     const uid = decoded.uid;
-    // console.log("UID:", uid);
+    console.log("UID:", uid);
 
-    // Check if user exists
     const user = await prisma.user.findUnique({ where: { firebaseId: uid } });
     if (!user) return NextResponse.json({ error: 'User not found' }, { status: 404 });
 
-    // console.log("User:", user.id);
-    // Get journals
+    console.log("User:", user.id);
+
     const journals = await prisma.journal.findMany({ where: { userId: user.id } });
 
     if (!journals.length) {

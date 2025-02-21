@@ -1,17 +1,19 @@
-import axios from 'axios';
+import { cookies } from "next/headers"; 
 
-const apiClient = axios.create({
-  baseURL: '/api', 
-});
+export async function apiFetch(url: string, options: RequestInit = {}) {
+  const token = (await cookies()).get("token")?.value;
 
-apiClient.interceptors.request.use(async (config) => {
-  const token = localStorage.getItem('token');
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
-  return config;
-}, (error) => {
-  return Promise.reject(error);
-});
+  const defaultHeaders = {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${token}`,
+  };
 
-export default apiClient;
+  return fetch(url, {
+    ...options,
+    headers: {
+      ...defaultHeaders,
+      ...options.headers,
+    },
+    credentials: "include",
+  });
+}
