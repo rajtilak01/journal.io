@@ -1,9 +1,12 @@
-import  { apiFetch } from "@/lib/apiFetch"
+import { apiFetch } from "@/lib/apiFetch";
 import Navbar from "./Navbar";
 import { cookies } from "next/headers";
+import { Journal } from "@/lib/types";
+import Card from "./Card";
+import { redirect } from "next/navigation";
 
 async function Dashboard() {
-  const token = (await cookies()).get("token")?.value;
+  // const token = (await cookies()).get("token")?.value;
 
   const response = await apiFetch("http://localhost:3000/api/get-journals", {
     cache: "no-cache",
@@ -13,13 +16,17 @@ async function Dashboard() {
   const result = await response.json();
 
   //todo redirect to login page if not authenticated
-  if (result.error == "Not authenticated") return <h1>{result.error}</h1>;
-
+  if (result.error == "Not authenticated") redirect('/login')
+  if(result.length == 0) redirect('/login')
   console.log(result);
   return (
     <div>
       <Navbar />
-      Printing journals with token from cookies: {token || "No token found"}
+      {result.map((journal: Journal) => (
+        <div key={journal.id}>
+          <Card journal= {journal}/>
+        </div>
+      ))}
     </div>
   );
 }

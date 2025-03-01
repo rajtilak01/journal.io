@@ -13,6 +13,16 @@ const firebaseConfig = {
   measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
 };
 
+// const firebaseConfig = {
+//   apiKey: "AIzaSyDV8uWUv3g5Sn7friOCLJmJnwcN__Hra_g",
+//   authDomain: "journal-io-6397e.firebaseapp.com",
+//   projectId: "journal-io-6397e",
+//   storageBucket: "journal-io-6397e.firebasestorage.app",
+//   messagingSenderId: "171937377125",
+//   appId: "1:171937377125:web:db732c941908f5c46ecf8c",
+//   measurementId: "G-11XRLBG9BX"
+// };
+
 const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
 
 const auth = getAuth(app);

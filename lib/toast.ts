@@ -1,13 +1,11 @@
 import { toast } from 'react-hot-toast';
 
-// Loading Toast
 export const showLoadingToast = (message = "Loading...") => {
   return toast.loading(message, {
     icon: "🤔",
   });
 };
 
-// Success Toast
 export const showSuccessToast = (message = "Success") => {
   toast.dismiss();
 return toast.success(message, {
@@ -21,7 +19,6 @@ return toast.success(message, {
 });
 };
 
-
 export const showErrorToast = (message = "Something went wrong") => {
   toast.dismiss(); 
   return toast.error(message, {
@@ -32,7 +29,6 @@ export const showErrorToast = (message = "Something went wrong") => {
   });
 };
 
-// Dismiss Toast Manually
 export const dismissToast = (toastId: string) => {
   toast.dismiss(toastId);
 };

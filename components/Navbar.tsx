@@ -8,7 +8,7 @@ function Navbar() {
     // const router = useRouter();
     const { user } = useAuth();
     return (
-        <div className='flex justify-between items-center mb-4'>
+        <div className='flex justify-between items-center mb-4 border-b border-gray-200 p-4'>
             <div><h1 className="text-2xl font-bold">Hi {user?.email}</h1></div>
             <div>
                 <Avatar>
