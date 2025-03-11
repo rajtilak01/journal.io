@@ -1,20 +1,27 @@
 import { apiFetch } from "@/lib/apiFetch";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
+import parse from "html-react-parser";
+import Navbar from "@/components/Navbar";
 
-export default async function Journal({ params }: {params: any}) {
-    const { id } = await params;
-    const response = await apiFetch(`http://localhost:3000/api/get-journal-byId?id=${id}`);
+export default async function Journal({ params }: { params: any }) {
+  const { id } = params;
+  const response = await apiFetch(
+    `http://localhost:3000/api/get-journal-byId?id=${id}`
+  );
 
-    if (!response.ok) {
-        return notFound(); 
-    }
-    const data = await response.json();
-    
-    return (
-        <div>
-            <h1>Journal Page</h1>
-            <p>Journal ID: {data.data.id}</p>
-            <h2>Journal content: {data.data.content}</h2>
+  if (!response.ok) {
+    return redirect("/login");
+  }
+  const data = await response.json();
+
+  return (
+    <div className="flex flex-col h-screen">
+      <Navbar />
+      <div className="flex-1 overflow-auto p-4 md:p-6 border-solid">
+        <p className="prose lg:prose-lg">{parse(data.data.content)}</p>
         </div>
-    );
+      <div>
+      </div>
+    </div>
+  );
 }

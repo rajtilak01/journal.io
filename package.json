@@ -31,6 +31,7 @@
     "firebase-admin": "^13.1.0",
     "firebaseui": "^6.1.0",
     "framer-motion": "^12.4.2",
+    "html-react-parser": "^5.2.2",
     "js-cookie": "^3.0.5",
     "lucide-react": "^0.462.0",
     "motion": "^12.4.7",
