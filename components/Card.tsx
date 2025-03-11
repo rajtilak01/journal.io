@@ -1,16 +1,10 @@
 import { Journal } from "@/lib/types";
-import { dateConverter } from "@/lib/utils";
+import { dateConverter, truncateContent } from "@/lib/utils";
 import Link from "next/link";
 import { Button } from "./ui/button";
-import parse from "html-react-parser";
 
 export default function Card({ journal }: { journal: Journal }) {
-  const truncateContent = (htmlContent: string, maxLength: number) => {
-    const plainText = htmlContent.replace(/<[^>]+>/g, ""); 
-    return plainText.length > maxLength
-      ? plainText.substring(0, maxLength) + "..."
-      : plainText;
-  };
+ 
 
   return (
     <div className="border border-gray-200 p-4 m-4 rounded-lg flex justify-between items-center">

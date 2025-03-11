@@ -12,3 +12,10 @@ export function dateConverter(createdAt: string) {
   const time = dateObj.toISOString().split("T")[1].split(":").slice(0, 2).join(":");
   return { date, time };
 } 
+
+export function truncateContent(htmlContent: string, maxLength: number): string {
+  const plainText = htmlContent.replace(/<[^>]+>/g, ""); 
+  return plainText.length > maxLength
+    ? plainText.substring(0, maxLength) + "..."
+    : plainText;
+}

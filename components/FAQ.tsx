@@ -26,7 +26,7 @@ export default function FAQ() {
         <AccordionItem value="item-2">
           <AccordionTrigger>Can I access my journal offline?</AccordionTrigger>
           <AccordionContent>
-            Yes, journal.io works offline! Your entries are synchronized when you're back online,
+            Yes, journal.io works offline! Your entries are synchronized when you&apos;re back online,
             ensuring you never lose your thoughts.
           </AccordionContent>
         </AccordionItem>
