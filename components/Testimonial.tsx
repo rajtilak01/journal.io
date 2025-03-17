@@ -20,6 +20,8 @@ export default function Testimonials() {
                 src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face"
                 alt="Sarah Mitchell"
                 className="w-12 h-12 rounded-full"
+                width={12}
+                height={12}
               />
               <div className="ml-4">
                 <h4 className="font-semibold">Sarah Mitchell</h4>
@@ -38,6 +40,8 @@ export default function Testimonials() {
                 src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face"
                 alt="David Chen"
                 className="w-12 h-12 rounded-full"
+                height={12}
+                width={12}
               />
               <div className="ml-4">
                 <h4 className="font-semibold">David Chen</h4>
@@ -57,6 +61,8 @@ export default function Testimonials() {
                 src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop&crop=face"
                 alt="Emma Rodriguez"
                 className="w-12 h-12 rounded-full"
+                height={12}
+                width={12}
               />
               <div className="ml-4">
                 <h4 className="font-semibold">Emma Rodriguez</h4>

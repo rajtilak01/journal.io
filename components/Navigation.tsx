@@ -1,9 +1,11 @@
 import { Button } from "@mantine/core";
 import { BookText, MoonIcon, SunIcon } from "lucide-react";
 import { useTheme } from "next-themes";
+import { useRouter } from "next/navigation";
 
 export default function Navigation() {
     const { theme, setTheme } = useTheme();
+    const router = useRouter();
     return (
         <nav className="border-b sticky top-0 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -21,7 +23,9 @@ export default function Navigation() {
                 <SunIcon className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
                 <MoonIcon className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
               </Button>
-              <Button variant="outline">Sign In</Button>
+              <Button variant="outline" onClick={() => {
+                router.push('/login')
+              }}>Sign In</Button>
               <Button>Get Started</Button>
             </div>
           </div>
