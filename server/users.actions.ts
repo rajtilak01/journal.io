@@ -4,28 +4,15 @@ import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { auth } from "@/lib/firebaseAdmin";
 
-export async function createUser(email: string, user: any) {
+export async function createUser(email: string, name: string, user: any) {
   return await prisma.user.create({
     data: {
       email: email,
+      name: name,
       firebaseId: user.uid,
     },
   });
 }
-
-// export async function setCookie(token: string) {
-//   try {
-//     (await cookies()).set({
-//       name: "token",
-//       value: token,
-//       sameSite: "strict",
-//       httpOnly: true,
-//     });
-//   } catch (error) {
-//     console.error("Error setting cookie", error);
-//     return 
-//   }
-// }
 
 export async function deleteAccount(userId: string) {
 

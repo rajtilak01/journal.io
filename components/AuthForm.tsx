@@ -29,7 +29,7 @@ export default function AuthForm({ type }: { type: "signin" | "signup" }) {
       } else if (type === "signup") {
         user = await signUpWithEmailAndPassword(email, password);
         if (!user) return;
-        await createUser(email, { uid: user.uid });
+        await createUser(email, user.displayName ?? "", { uid: user.uid });
       }
 
       const token = await user?.getIdToken();
@@ -46,11 +46,17 @@ export default function AuthForm({ type }: { type: "signin" | "signup" }) {
   const handleGoogleLogin = async () => {
     try {
       const user = await signInWithGoogle();
+      if(!user) return;
+      const isNewUser = user?.metadata?.creationTime === user?.metadata?.lastSignInTime;
+      if (isNewUser) {
+        await createUser(user.email ?? "", user.displayName ?? "", { uid: user.uid });
+      }
+      // console.log("user from google login", user);
       const token = await user?.getIdToken();
       if (!token) return;
       localStorage.setItem("token", token);
       setCookie(token);
-      // console.log("result after google login", user);
+      console.log("result after google login", user);
       router.push("/dashboard");
     } catch (error: any) {
       setError(error.message);
