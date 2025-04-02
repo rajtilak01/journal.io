@@ -8,6 +8,7 @@ import { createUser } from "@/server/users.actions";
 // import cookies from "next/headers";
 import axios from "axios";
 import { setCookie } from "@/server/auth.actions";
+import { Button } from "@mantine/core";
 
 export default function AuthForm({ type }: { type: "signin" | "signup" }) {
   const [email, setEmail] = useState("");
@@ -18,6 +19,7 @@ export default function AuthForm({ type }: { type: "signin" | "signup" }) {
     signInWithGoogle,
     loginWithEmailAndPassword,
     signUpWithEmailAndPassword,
+    sendPasswordResetEmail,
   } = useAuth();
 
   const handleEmailLogin = async (e: React.FormEvent) => {
@@ -151,7 +153,13 @@ export default function AuthForm({ type }: { type: "signin" | "signup" }) {
               : "Already have an account? Sign in"}
           </Link>
         </div>
-      </div>
+        {type === "signin"
+            && <div className="text-center mt-4">
+          <Link href={"/forget-password"} className="text-indigo-600 hover:text-indigo-500">
+            Forgot your password? Reset it here
+          </Link>
+        </div>}
+      </div> 
     </div>
   );
 }
