@@ -58,9 +58,11 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { apiFetch } from "@/lib/apiFetch";
 import { truncateContent } from "@/lib/utils";
+import { useAuth } from "@/app/context/AuthContext";
 
 export default function Dashboard() {
 
+  const { logout } = useAuth()
   const recentEntries = getEntry()
 
   async function getEntry() {
@@ -72,6 +74,12 @@ export default function Dashboard() {
     const result = await response.json();
     return result;
     
+  }
+
+  async function handleLogout() {
+    console.log("logout function called")
+    await logout()
+    redirect('/login')
   }
 
   // const response = await apiFetch("http://localhost:3000/api/get-journals", {
@@ -101,7 +109,7 @@ export default function Dashboard() {
               <Button variant="ghost" size="icon">
                 <Settings className="h-5 w-5" />
               </Button>
-              <Button variant="outline">Sign Out</Button>
+              <Button variant="outline" onClick={handleLogout}>Sign Out</Button>
             </div>
           </div>
         </div>

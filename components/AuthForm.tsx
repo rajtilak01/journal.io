@@ -9,8 +9,10 @@ import { createUser } from "@/server/users.actions";
 import axios from "axios";
 import { setCookie } from "@/server/auth.actions";
 import { Button } from "@mantine/core";
+import { useLoading } from "@/app/context/LoadingContext";
 
 export default function AuthForm({ type }: { type: "signin" | "signup" }) {
+  const { show, hide } = useLoading();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -22,6 +24,7 @@ export default function AuthForm({ type }: { type: "signin" | "signup" }) {
   } = useAuth();
 
   const handleEmailLogin = async (e: React.FormEvent) => {
+    show();
     e.preventDefault();
     try {
       let user = null;
@@ -41,10 +44,13 @@ export default function AuthForm({ type }: { type: "signin" | "signup" }) {
       router.push("/dashboard");
     } catch (error: any) {
       setError(error.message);
+    } finally{
+      hide();
     }
   };
 
   const handleGoogleLogin = async () => {
+    show();
     try {
       const user = await signInWithGoogle();
       if(!user) return;
@@ -61,6 +67,10 @@ export default function AuthForm({ type }: { type: "signin" | "signup" }) {
       router.push("/dashboard");
     } catch (error: any) {
       setError(error.message);
+      console.log("Error during google login", error)
+    }
+    finally{
+      hide();
     }
   };
 

@@ -6,7 +6,6 @@
     "@typescript-eslint/no-explicit-any": "off",
     "prefer-const": "off",
     "@typescript-eslint/no-unused-expressions": "off",
-    // "no-extra-semi": "off",
     "react-hooks/exhaustive-deps": "off",
     "no-useless-catch": "off",
   }
