@@ -11,6 +11,7 @@ import {
   mantineHtmlProps,
 } from "@mantine/core";
 import { Toaster } from "react-hot-toast";
+import { LoadingProvider } from "./context/LoadingContext";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -63,7 +64,9 @@ export default function RootLayout({
                   },
                 }}
               />
-              {children}
+              <LoadingProvider>
+                {children}
+              </LoadingProvider>
             </MantineProvider>
           </Providers>
         </ThemeProvider>
