@@ -19,7 +19,6 @@ export default function AuthForm({ type }: { type: "signin" | "signup" }) {
     signInWithGoogle,
     loginWithEmailAndPassword,
     signUpWithEmailAndPassword,
-    sendPasswordResetEmail,
   } = useAuth();
 
   const handleEmailLogin = async (e: React.FormEvent) => {

@@ -85,7 +85,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       await sendPasswordResetEmail(auth, email);
     }
     catch (error) { 
-      // console.error('Error sending password reset email:', error);
+      console.error('Error sending password reset email:', error);
       throw error;
     }
   };
